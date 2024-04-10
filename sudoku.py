@@ -1,15 +1,15 @@
-import pygame
 import random
 from copy import deepcopy
 
+
 class Sudoku:
-  
+
     def __init__(self):
 
-        self.board = [[0]*9 for _ in range(9)]
+        self.board = [[0] * 9 for _ in range(9)]
         self.solved = None
 
-    def print_board(self,board):
+    def print_board(self, board):
         for i in range(len(board)):
             if i % 3 == 0 and i != 0:
                 print("- - - - - - - - - - - - ")
@@ -69,10 +69,15 @@ class Sudoku:
                     return True
 
                 self.board[row][col] = 0
-        
+
         return False
-    
+
     def generate(self):
+
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        self.board[row][col] = random.randint(0, 8)
+
         self.solve_sudoku()
 
         self.solved_board = deepcopy(self.board)
@@ -80,18 +85,17 @@ class Sudoku:
         for _ in range(40):
             row = random.randint(0, 8)
             col = random.randint(0, 8)
-            while self.board[row][col] == 0: 
+            while self.board[row][col] == 0:
                 row = random.randint(0, 8)
                 col = random.randint(0, 8)
             self.board[row][col] = 0
 
 
-
-if __name__ == "__main__":
-    # Sudoku board (0 represents empty spots)
-    game = Sudoku()
-    game.generate()
-    print("Original Sudoku Board:")
-    game.print_board(game.board)
-    print("Solved Sudoku Board:")
-    game.print_board(game.solved_board)
+# if __name__ == "__main__":
+#     # Sudoku board (0 represents empty spots)
+#     game = Sudoku()
+#     game.generate()
+#     print("Original Sudoku Board:")
+#     game.print_board(game.board)
+#     print("Solved Sudoku Board:")
+#     game.print_board(game.solved_board)
